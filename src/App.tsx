@@ -1,6 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import "./App.css";
-import StarrySky from "./StarrySky";
+import StarrySky from "./Components/StarrySky/StarrySky";
 import { Stats } from "@react-three/drei";
 
 function App() {
