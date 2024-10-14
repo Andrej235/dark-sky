@@ -4,19 +4,32 @@ import ShootingStar from "../ShootingStar/ShootingStar";
 import { MathUtils } from "three";
 import Header from "../Header/Header";
 import Stars from "../Stars/Stars";
-
-const particles = Array.from({ length: 25 }, () => ({
-  scale: MathUtils.randFloat(0.5, 1),
-  factor: MathUtils.randInt(20, 100),
-  speed: MathUtils.randFloat(0.01, 0.75),
-  xFactor: MathUtils.randFloatSpread(40),
-  yFactor: MathUtils.randFloatSpread(10),
-  zFactor: MathUtils.randFloatSpread(10),
-}));
-
+import { useMemo } from "react";
 //Make custom stars? they would glow like shooting ones
 
 export default function StarrySky() {
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 25 }, () => {
+        const x = {
+          scale: MathUtils.randFloat(0.5, 1),
+          trailLength: 1,
+          trailWidth: 1,
+          factor: MathUtils.randInt(20, 100),
+          speed: MathUtils.randFloat(0.01, 0.75),
+          xFactor: MathUtils.randFloatSpread(40),
+          yFactor: MathUtils.randFloatSpread(10),
+          zFactor: MathUtils.randFloatSpread(10),
+        };
+
+        x.trailLength *= x.scale;
+        x.trailWidth *= x.scale;
+
+        return x;
+      }),
+    []
+  );
+
   return (
     <>
       <Html>

@@ -5,8 +5,10 @@ import { Mesh } from "three";
 
 type ShootingStarProps = {
   particle: {
-    factor: number;
     scale: number;
+    trailLength: number;
+    trailWidth: number;
+    factor: number;
     speed: number;
     xFactor: number;
     yFactor: number;
@@ -15,7 +17,16 @@ type ShootingStarProps = {
 };
 
 export default function ShootingStar({
-  particle: { scale, factor, speed, xFactor, yFactor, zFactor },
+  particle: {
+    scale,
+    trailLength,
+    trailWidth,
+    factor,
+    speed,
+    xFactor,
+    yFactor,
+    zFactor,
+  },
 }: ShootingStarProps) {
   const ref = useRef<Mesh>(null);
 
@@ -41,12 +52,13 @@ export default function ShootingStar({
         (Math.sin(t * 3) * factor) / 4
     );
   });
+
   return (
     <Trail
       children={<Instance ref={ref} scale={scale} />}
       color={0xffffff}
       attenuation={(t) => t * t}
-      width={5}
+      width={3}
       length={8}
     />
   );
